@@ -1,4 +1,4 @@
-import './login.css';
+import './signup.css';
 import { Button, Form, Stack } from 'react-bootstrap';
 
 const Login = () => {
@@ -16,10 +16,10 @@ const Login = () => {
                 />
               </div>
               <div className="p-1">
-                <b>Welcome Back!</b>
+                <b>Sign Up</b>
               </div>
               <div className="p-1">
-                <h6>Email</h6>
+                <h6>Name*</h6>
               </div>
               <div className="p-2">
                 <Form>
@@ -28,14 +28,30 @@ const Login = () => {
                     controlId="formBasicEmail"
                   >
                     <Form.Control
-                      type="email"
-                      placeholder="Enter email"
+                      type="Name"
+                      placeholder="Nama Lengakap"
                     />
                   </Form.Group>
                 </Form>
               </div>
               <div className="p-1">
-                <h6>Password</h6>
+                <h6>Email*</h6>
+              </div>
+              <div className="p-2 ">
+                <Form>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="formBasicEmail"
+                  >
+                    <Form.Control
+                      type="Email"
+                      placeholder="Contoh:johndee@gmail.com"
+                    />
+                  </Form.Group>
+                </Form>
+              </div>
+              <div className="p-1">
+                <h6>Create Password*</h6>
               </div>
               <div className="p-2 ">
                 <Form>
@@ -51,11 +67,11 @@ const Login = () => {
                 </Form>
               </div>
               <div className="d-grid gap-2 signinbutton">
-                <Button>Sign In</Button>
+                <Button>Sign Up</Button>
               </div>
               <div className="p-2">
                 <h1>
-                  Don’t have an account?<a href="http://localhost:5173/Signup">Sign Up for free</a>
+                  Already have an account?<a href="http://localhost:5173/login">Sign In here</a>
                 </h1>
               </div>
             </Stack>
