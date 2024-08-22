@@ -1,7 +1,44 @@
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 import { Button, Form, Stack } from 'react-bootstrap';
+import { useState } from 'react';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  console.log(formData);
+  const onInputChange = (e) => {
+    const newFormData = { ...formData, [e.target.name]: e.target.value };
+    setFormData(newFormData);
+  };
+
+  const storeToLocalStorage = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://api-car-rental.binaracademy.org/customer/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const user = await response.json();
+        storeToLocalStorage(user);
+        navigate('/');
+      } else {
+        throw new Error(response.statusText);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <>
       <section id="welcome back">
@@ -30,6 +67,8 @@ const Login = () => {
                     <Form.Control
                       type="email"
                       placeholder="Enter email"
+                      onChange={onInputChange}
+                      name="email"
                     />
                   </Form.Group>
                 </Form>
@@ -46,12 +85,14 @@ const Login = () => {
                     <Form.Control
                       type="password"
                       placeholder="6+ karakter"
+                      onChange={onInputChange}
+                      name="password"
                     />
                   </Form.Group>
                 </Form>
               </div>
               <div className="d-grid gap-2 signinbutton">
-                <Button>Sign In</Button>
+                <Button onClick={onHandleSubmit}>Sign In</Button>
               </div>
               <div className="p-2">
                 <h1>
